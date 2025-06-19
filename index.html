@@ -1,34 +1,18 @@
 <!DOCTYPE html>
-<html lang="km">
+<!-- Add data-theme attribute for theme management, default to dark -->
+<html lang="km" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sreng | អ្នកបង្កើតគេហទំព័រខ្មែរ</title>
     
-    <!-- Meta Tags for SEO and Social Sharing -->
     <meta name="description" content="ស្វាគមន៍មកកាន់គេហទំព័ររបស់ ស្រេង - ជាកន្លែងបង្ហាញពីដំណើរ ជំនាញ និងគម្រោងនានាក្នុងការបង្កើតគេហទំព័រ។">
-    <meta property="og:title" content="Sreng | អ្នកបង្កើតគេហទំព័រខ្មែរ">
-    <meta property="og:description" content="ស្វាគមន៍មកកាន់គេហទំព័ររបស់ ស្រេង។ រូបភាព ដំណើរជីវិត និងជំនាញក្នុងការរចនាគេហទំព័រ។">
-    <meta property="og:image" content="https://i.ibb.co/L5hP30z/photo-2025-06-17-11-49-53.jpg">
-    <meta property="og:url" content="https://sreng.netlify.app/">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sreng | អ្នកបង្កើតគេហទំព័រខ្មែរ">
-    <meta name="twitter:description" content="រូបភាព និងគម្រោងរបស់ស្រេងក្នុងការសាងសង់ Web UI និងបច្ចេកវិទ្យា។">
-    <meta name="twitter:image" content="https://i.ibb.co/L5hP30z/photo-2025-06-17-11-49-53.jpg">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="img/favicon-32x32.png">
     
-    <!-- Google Fonts -->
+    <link rel="icon" type="image/x-icon" href="img/favicon-32x32.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- External CSS File -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -41,31 +25,32 @@
             <li><a href="#home">ទំព័រដើម</a></li>
             <li><a href="#about">អំពីខ្ញុំ</a></li>
             <li><a href="#skills">ជំនាញ</a></li>
+            <li><a href="#timeline">ដំណើរជីវិត</a></li>
+            <li><a href="#projects">គម្រោង</a></li>
             <li><a href="#contact">ទំនាក់ទំនង</a></li>
-            <li><a href="about.html">អារម្មណ៍ខ្ញុំ</a></li>
         </ul>
-        <div class="menu-icon" id="menu-icon">
-            <i class="fa-solid fa-bars"></i>
+        <div class="nav-controls">
+            <button class="theme-toggle" id="theme-toggle" aria-label="ប្តូរ Theme">
+                <i class="fas fa-sun" aria-hidden="true"></i>
+                <i class="fas fa-moon" aria-hidden="true"></i>
+            </button>
+            <button class="menu-icon" id="menu-icon" aria-label="បើក ឬបិទម៉ឺនុយ" aria-expanded="false" aria-controls="nav-links">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
         </div>
     </nav>
 
     <main>
         <section id="home" class="hidden-section">
             <div class="hero-text">
-                <h1 class="greeting">សួស្តី, ខ្ញុំ <span class="highlight">ស្រេង</span></h1>
+                <h1 class="greeting" id="greeting-text">សួស្តី, ខ្ញុំ <span class="highlight">ស្រេង</span></h1>
                 <p class="about-paragraph">
-                    Hey! I'm <strong>Sreng</strong>. I'm a student at
-                    <strong>Koh Brak Buddhist School</strong>. I love learning about
-                    technology, especially software development, web design, and coding.
-                    I'm always curious about how things work on the internet and enjoy
-                    building simple websites and bots. In my free time, I explore new
-                    tools and improve my coding skills. My dream is to become a
-                    professional developer who builds useful things for people.
+                    Hey! I'm <strong>Sreng</strong>, a passionate self-taught web developer from Cambodia. I love building things for the web and turning ideas into beautiful, interactive digital experiences.
                 </p>
             </div>
             <div class="hero-image-container">
-                <div class="profile-image-wrapper">
-                    <img src="img/photo_2025-06-14_21-57-24.jpg" alt="រូបភាពរបស់ស្រេង" class="profile-image">
+                <div class="image-skeleton profile-skeleton">
+                    <img data-src="img/photo_2025-06-14_21-57-24.jpg" alt="រូបភាព Profile របស់ស្រេង" class="profile-image lazy-image">
                 </div>
             </div>
         </section>
@@ -74,106 +59,166 @@
             <div class="glass-card">
                 <h1 class="section-title">រឿងរ៉ាវរបស់ខ្ញុំ</h1>
                 <p>
-                    ខ្ញុំបានកើតនៅក្នុងពិភពដ៏ស្ងប់ស្ងាត់មួយ — ជាកន្លែងដែលខ្ញុំត្រូវធំដឹងក្តីដោយគ្មានការគាំទ្រ គ្មានការលើកទឹកចិត្ត និងគ្មាននរណាម្នាក់សួរថា <span class="highlight">"តើអ្នកសុខសប្បាយទេ?"</span>
+                    ខ្ញុំបានចាប់ផ្តើមដំណើររបស់ខ្ញុំដោយការចង់ដឹងចង់ឃើញ។ ភាពឯកោបានបង្រៀនខ្ញុំពី<span class="highlight">ភាពរឹងមាំ</span> ហើយការលំបាកបានបង្រៀនខ្ញុំពី<span class="highlight">ប្រាជ្ញា</span>។ រាល់បន្ទាត់កូដដែលខ្ញុំសរសេរ គឺជារឿងរ៉ាវនៃការលូតលាស់របស់ខ្ញុំ។
                 </p>
-                <p>
-                    តាំងពីនៅក្មេង ខ្ញុំបានក្លាយជានិមិត្តរូបនៃ<span class="highlight">ការរស់រានមានជីវិត</span>។ ខ្ញុំមិនដែលរំពឹងថានឹងមានជំនួយទេ។ ខ្ញុំបានក្លាយជាពន្លឺផ្ទាល់ខ្លួនរបស់ខ្ញុំនៅក្នុងភាពងងឹត។ ភាពឯកោបានបង្រៀនខ្ញុំពី<span class="highlight">ភាពរឹងមាំ</span> ហើយការលំបាកបានបង្រៀនខ្ញុំពី<span class="highlight">ប្រាជ្ញា</span>។
-                </p>
-                <p>
-                    ខ្ញុំមិនមានអនាគតដ៏ល្អឥតខ្ចោះដែលបានគូសវាសទុកជាមុនទេ។ ប៉ុន្តែខ្ញុំមាន<span class="highlight">ក្តីសុបិន</span>មួយ គឺដើម្បីក្លាយជាមនុស្សល្អជាងម្សិលមិញ។ ដើម្បីប្រើប្រាស់កូដ ការច្នៃប្រឌិត និងភាពក្លាហាន ដើម្បីកសាងជីវិតប្រកបដោយអត្ថន័យ — ម្ដងមួយបន្ទាត់។
-                </p>
-                <a href="about.html" class="read-more-link">អានបន្តទៀតឬ?</a>
+                <a href="about.html" class="read-more-link">អានបន្តទៀត <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
         </section>
 
         <section id="skills" class="hidden-section">
             <h1 class="section-title"><span class="highlight">ជំនាញ</span>របស់ខ្ញុំ</h1>
             <div class="skills-grid">
-                <div class="skill-card hidden-section">
-                    <div class="skill-header">
-                        <i class="fab fa-html5 skill-icon"></i>
-                        <h2 class="skill-title">HTML</h2>
-                    </div>
-                    <p class="skill-description">
-                        ខ្ញុំអាចបង្កើតរចនាសម្ព័ន្ធគេហទំព័រដែលរឹងមាំ និងមានអត្ថន័យ (semantic) ដើម្បីធានាបាននូវភាពងាយស្រួលក្នុងការចូលប្រើ (accessibility) និង SEO ល្អ។
-                    </p>
+                 <div class="skill-card hidden-section">
+                    <div class="skill-header"><i class="fab fa-html5 skill-icon" aria-hidden="true"></i><h2 class="skill-title">HTML</h2></div>
+                    <p class="skill-description">ខ្ញុំអាចបង្កើតរចនាសម្ព័ន្ធគេហទំព័រដែលរឹងមាំ និងមានអត្ថន័យ (semantic) ដើម្បីធានាបាននូវភាពងាយស្រួលក្នុងការចូលប្រើ (accessibility) និង SEO ល្អ។</p>
                 </div>
                 <div class="skill-card hidden-section" style="transition-delay: 0.2s;">
-                    <div class="skill-header">
-                        <i class="fab fa-css3-alt skill-icon"></i>
-                        <h2 class="skill-title">CSS</h2>
-                    </div>
-                    <p class="skill-description">
-                        ជំនាញក្នុងការបង្កើត Layout ដែលអាចបត់បែនបាន (responsive) ជាមួយ Flexbox និង Grid, និងបង្កើតចលនា (animations) ដ៏រស់រវើកដើម្បីឱ្យអ្នកប្រើប្រាស់មានបទពិសោធន៍ល្អ។
-                    </p>
+                    <div class="skill-header"><i class="fab fa-css3-alt skill-icon" aria-hidden="true"></i><h2 class="skill-title">CSS</h2></div>
+                    <p class="skill-description">ជំនាញក្នុងការបង្កើត Layout ដែលអាចបត់បែនបាន (responsive) ជាមួយ Flexbox និង Grid, និងបង្កើតចលនា (animations) ដ៏រស់រវើក។</p>
                 </div>
                 <div class="skill-card hidden-section" style="transition-delay: 0.4s;">
-                    <div class="skill-header">
-                        <i class="fab fa-js skill-icon"></i>
-                        <h2 class="skill-title">JavaScript</h2>
-                    </div>
-                    <p class="skill-description">
-                       ខ្ញុំអាចធ្វើឱ្យគេហទំព័រមានអន្តរកម្ម, គ្រប់គ្រងព្រឹត្តិការណ៍ (events), ធ្វើការជាមួយ DOM, និងតភ្ជាប់ទៅកាន់ APIs ដើម្បីទាញយកទិន្នន័យពីខាងក្រៅ។
-                    </p>
+                    <div class="skill-header"><i class="fab fa-js skill-icon" aria-hidden="true"></i><h2 class="skill-title">JavaScript</h2></div>
+                    <p class="skill-description">ខ្ញុំអាចធ្វើឱ្យគេហទំព័រមានអន្តរកម្ម, គ្រប់គ្រងព្រឹត្តិការណ៍ (events), ធ្វើការជាមួយ DOM និងតភ្ជាប់ទៅកាន់ APIs។</p>
                 </div>
             </div>
         </section>
 
-
-
+        <section id="timeline" class="hidden-section">
+            <h1 class="section-title"><span class="highlight">ដំណើរ</span>ជីវិត</h1>
+            <div class="timeline-container">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h2>2023 - ចំណុចចាប់ផ្តើម</h2>
+                        <p>ចាប់ផ្តើមស្វែងយល់ពីពិភពកូដដំបូង ដោយរៀនពី HTML និង CSS។ បានបង្កើតគេហទំព័រដំបូងបំផុតដែលជា Static page ដ៏សាមញ្ញ។</p>
+                    </div>
+                </div>
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h2>2024 - ការឈានចូល JavaScript</h2>
+                        <p>បានចាប់ផ្តើមរៀន JavaScript ដើម្បីធ្វើឱ្យគេហទំព័រមានអន្តរកម្ម។ បានបង្កើតគម្រោងតូចៗដូចជា Calculator និង To-Do List។</p>
+                    </div>
+                </div>
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h2>ដើមឆ្នាំ 2025 - ការស្វែងយល់ពី Backend</h2>
+                        <p>ចាប់ផ្តើមរៀនអំពី APIs និងបានបង្កើត Telegram Bot ដំបូង (Dictionary Bot) ដោយប្រើប្រាស់ Serverless Functions។</p>
+                    </div>
+                </div>
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h2>បច្ចុប្បន្ន 2025 - ការកសាង Portfolio</h2>
+                        <p>កំពុងផ្តោតសំខាន់លើការកសាង Portfolio នេះឡើង, ដោយប្រើប្រាស់នូវរាល់ជំនាញដែលបានរៀន និងកែលម្អវាជារៀងរាល់ថ្ងៃ។</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <section id="projects" class="hidden-section">
-    <h1 class="section-title"><span class="highlight">គម្រោងស្ថិតក្នុងការសាកល្បង</span>របស់ខ្ញុំ</h1>
-    <div class="projects-grid">
-        <!-- គម្រោងទី១ -->
-        <div class="project-card">
-            <img src="project/dic.jpg" alt="រូបភាពគម្រោងទី១">
-            <h3>DictionaryKhmerBot</h3>
-            <p>បូត Telegram នេះបង្កើតឡើងដើម្បីជួយសម្រួលដល់ការស្វែងរកអត្ថន័យពាក្យក្នុងវចនានុក្រមខ្មែរដោយផ្ទាល់។ ផ្តល់និយមន័យបានរហ័ស និងត្រឹមត្រូវ ដោយតភ្ជាប់ជាមួយ API របស់វចនានុក្រមសម្តេចព្រះសង្ឃរាជ ជួន ណាត។</p>
-            <div class="project-links">
-                <a href="https://t.me/dictionarykhbot" target="_blank">សាកល្បង Bot</a>
-                <a href="#" target="_blank">មើលកូដ coming soon (GitHub)</a>
+            <h1 class="section-title"><span class="highlight">គម្រោងធ្វើលេង</span>របស់ខ្ញុំ</h1>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="image-skeleton"><img data-src="project/dic.jpg" alt="រូបភាពគម្រោង DictionaryKhmerBot" class="lazy-image"></div>
+                    <h3>DictionaryKhmerBot</h3>
+                    <p>បូត Telegram សម្រាប់ស្វែងរកអត្ថន័យពាក្យក្នុងវចនានុក្រមខ្មែរ។</p>
+                    <div class="project-links"><a href="https://t.me/dictionarykhbot" target="_blank">សាកល្បង Bot</a></div>
+                </div>
+                <div class="project-card">
+                    <div class="image-skeleton"><img data-src="project/bot.jpg" alt="រូបភាពគម្រោង DownloadFromPlatformBot" class="lazy-image"></div>
+                    <h3>DownloadFromPlatformBot</h3>
+                    <p>ជាជំនួយការសម្រាប់ទាញយកវីដេអូ ឬចម្រៀងពីបណ្ដាញសង្គមធំៗ។</p>
+                    <div class="project-links"><a href="#" target="_blank" class="disabled-link">Coming Soon</a></div>
+                </div>
+                 <div class="project-card">
+                    <div class="image-skeleton"><img data-src="https://placehold.co/600x400/74ee15/0f0c29?text=Weather+App" alt="រូបភាពគម្រោង Weather App" class="lazy-image"></div>
+                    <h3>Weather Forecast App</h3>
+                    <p>កម្មវិធីគេហទំព័រសាមញ្ញមួយសម្រាប់ពិនិត្យមើលការព្យាករណ៍អាកាសធាតុបច្ចុប្បន្ននៅទីតាំងណាមួយ។</p>
+                    <div class="project-links"><a href="#" target="_blank" class="disabled-link">Live Demo</a><a href="#" target="_blank" class="disabled-link">GitHub</a></div>
+                </div>
+                <div class="project-card">
+                    <div class="image-skeleton"><img data-src="https://placehold.co/600x400/f000ff/eaf2ff?text=Todo+List" alt="រូបភាពគម្រោង Todo List" class="lazy-image"></div>
+                    <h3>Interactive To-Do List</h3>
+                    <p>កម្មវិធីសម្រាប់គ្រប់គ្រងកិច្ចការប្រចាំថ្ងៃ ដែលអាចឱ្យអ្នកប្រើប្រាស់បន្ថែម, លុប, និងគូសចំណាំកិច្ចការ។</p>
+                    <div class="project-links"><a href="#" target="_blank" class="disabled-link">Live Demo</a><a href="#" target="_blank" class="disabled-link">GitHub</a></div>
+                </div>
             </div>
-        </div>
-        <!-- គម្រោងទី២ -->
-        <div class="project-card">
-            <img src="project/bot.jpg" alt="រូបភាពគម្រោងទី២">
-            <h3>DownloadFromPlatformBot</h3>
-            <p>ជាជំនួយការសម្រាប់ទាញយកវីដេអូ ឬចម្រៀងពីបណ្ដាញសង្គមធំៗដូចជា YouTube, TikTok, និង Facebook បានយ៉ាងងាយស្រួល។ អ្នកប្រើប្រាស់គ្រាន់តែផ្ញើតំណភ្ជាប់ (link) ហើយបូតនឹងបញ្ជូន File ត្រឡប់មកវិញភ្លាមៗ។</p>
-            <div class="project-links">
-                <a href="#" target="_blank">សាកល្បង coming soon Bot</a>
-                <a href="#" target="_blank">មើលកូដ (GitHub)</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-
+        </section>
 
         <section id="contact" class="hidden-section">
-             <div class="glass-card">
-                <h2 class="section-title">ទំនាក់ទំនង</h2>
-                <p>ប្រសិនបើអ្នកចង់សហការ គាំទ្រ ឬគ្រាន់តែនិយាយពាក្យសួស្តី សូមទំនាក់ទំនងមកខ្ញុំ!</p>
-                <div class="contact-links">
-                    <a href="https://t.me/srengone" target="_blank" class="contact-btn">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="mailto:srenggkun888@gmail.com" class="contact-btn">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                     <a href="https://github.com/Lenglaosreng" class="contact-btn">
-                     <i class="fab fa-github"></i> GitHub
-                    </a>
-                </div>
+            <div class="glass-card">
+                <h2 class="section-title">ផ្ញើសារមកខ្ញុំ</h2>
+                <p>ទម្រង់នេះនឹងផ្ញើសារដោយផ្ទាល់ទៅកាន់ Telegram របស់ខ្ញុំ!</p>
+                
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">ឈ្មោះរបស់អ្នក</label>
+                        <input type="text" id="name" name="name" class="form-input" required placeholder="ឧ. សុខ ចាន់ថា">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">អ៊ីមែលរបស់អ្នក (ស្រេចចិត្ត)</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="ឧ. sok.chantha@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phonenumber" class="form-label">លេខទូរស័ព្ទ (ស្រេចចិត្ត)</label>
+                        <input type="tel" id="phonenumber" name="phonenumber" class="form-input" placeholder="ឧ. 012 345 678">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">សាររបស់អ្នក</label>
+                        <textarea id="message" name="message" class="form-textarea" rows="5" required placeholder="សរសេរសាររបស់អ្នកនៅទីនេះ..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit-btn" id="form-submit-btn">
+                        <span class="submit-btn-text">ផ្ញើសារទៅ Telegram</span>
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                    </button>
+                    <div id="form-status" class="form-status"></div>
+                </form>
             </div>
         </section>
     </main>
 
+    <button class="chatbot-toggle" id="chatbot-toggle" aria-label="បើក ឬបិទប្រអប់ជជែក">
+        <span aria-hidden="true">💬</span>
+    </button>
+
+    <div class="chatbot-popup" id="chatbot-popup">
+      <div class="chatbot-header">🤖 SrengBot</div>
+      <div class="chatbot-body" id="chatbot-body"></div>
+      <div class="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="សួរអ្វីមក SrengBot..." aria-label="បញ្ចូលសាររបស់អ្នកនៅទីនេះ">
+        <button id="chatbot-send" aria-label="ផ្ញើសារ"><span aria-hidden="true">Send</span></button>
+      </div>
+    </div>
+
     <footer class="footer">
-        <p>© 2024 Sreng. Built with passion and determination from Cambodia 🇰🇭</p>
-        <p>Every line of code tells a story of growth and perseverance.</p>
+        <p>© 2025 Sreng. Built with passion and determination from Cambodia 🇰🇭</p>
     </footer>
 
-    <!-- External JavaScript File -->
     <script src="script.js"></script>
+
+
+<script>
+// 🔒 Disable right-click menu
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// 🔒 Block common developer shortcuts
+document.onkeydown = function(e) {
+  // F12
+  if (e.key === "F12") return false;
+
+  // Ctrl+U, Ctrl+Shift+I/C/J
+  if (e.ctrlKey && (
+      e.key.toLowerCase() === "u" ||
+      e.key.toLowerCase() === "i" ||
+      e.key.toLowerCase() === "j" ||
+      e.key.toLowerCase() === "c"
+  )) {
+    return false;
+  }
+};
+</script>
+    
 </body>
 </html>
