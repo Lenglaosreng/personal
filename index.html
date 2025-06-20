@@ -118,7 +118,7 @@
         </section>
         
         <section id="projects" class="hidden-section">
-            <h1 class="section-title"><span class="highlight">គម្រោងធ្វើលេង</span>របស់ខ្ញុំ</h1>
+            <h1 class="section-title"><span class="highlight">គម្រោង</span>របស់ខ្ញុំ</h1>
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="image-skeleton"><img data-src="project/dic.jpg" alt="រូបភាពគម្រោង DictionaryKhmerBot" class="lazy-image"></div>
@@ -184,7 +184,7 @@
     </button>
 
     <div class="chatbot-popup" id="chatbot-popup">
-      <div class="chatbot-header">🤖 SrengBot</div>
+      <div class="chatbot-header"> SrengBot</div>
       <div class="chatbot-body" id="chatbot-body"></div>
       <div class="chatbot-input-container">
         <input type="text" id="chatbot-input" placeholder="សួរអ្វីមក SrengBot..." aria-label="បញ្ចូលសាររបស់អ្នកនៅទីនេះ">
@@ -197,28 +197,6 @@
     </footer>
 
     <script src="script.js"></script>
-
-
-<script>
-// 🔒 Disable right-click menu
-document.addEventListener('contextmenu', e => e.preventDefault());
-
-// 🔒 Block common developer shortcuts
-document.onkeydown = function(e) {
-  // F12
-  if (e.key === "F12") return false;
-
-  // Ctrl+U, Ctrl+Shift+I/C/J
-  if (e.ctrlKey && (
-      e.key.toLowerCase() === "u" ||
-      e.key.toLowerCase() === "i" ||
-      e.key.toLowerCase() === "j" ||
-      e.key.toLowerCase() === "c"
-  )) {
-    return false;
-  }
-};
-</script>
     
 </body>
 </html>
