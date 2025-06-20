@@ -1,3 +1,12 @@
+let recaptchaPassed = false;
+
+function onReCaptchaSuccess(token) {
+    recaptchaPassed = true;
+}
+function onReCaptchaExpired() {
+    recaptchaPassed = false;
+}
+
 /**
  * SECURED VERSION - Main entry point. Waits for the DOM to be fully loaded before running any scripts.
  */
@@ -9,27 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
  * Security utilities object to centralize all security-related functions.
  */
 const Security = {
-    /**
-     * Sanitizes user input by escaping potentially dangerous characters and limiting length.
-     * This is a primary defense against XSS.
-     * @param {string} input The string to sanitize.
-     * @param {number} maxLength The maximum allowed length of the string.
-     * @returns {string} The sanitized string.
-     */
-    sanitizeInput(input, maxLength = 500) {
-        if (typeof input !== 'string') return '';
-        const escapeMap = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#x27;',
-            '/': '&#x2F;'
-        };
-        const sanitized = input.replace(/[&<>"'/]/g, s => escapeMap[s]);
-        return sanitized.slice(0, maxLength).trim();
-    },
-
     /**
      * Validates form data with comprehensive checks.
      * @param {object} data - The form data object {name, email, phonenumber, message}.
@@ -120,9 +108,176 @@ function initializePage() {
     setupPerformanceObservers();
 }
 
-// All setup functions (setupTheme, setupMenu, etc.) are kept here for organization.
-// No major changes in these non-security related functions.
-function setupTheme(){const e=document.getElementById("theme-toggle");if(!e)return;const t=document.documentElement,n=e=>{t.setAttribute("data-theme",e)};n("dark"),e.addEventListener("click",()=>{const e=t.getAttribute("data-theme"),a="dark"===e?"light":"dark";n(a)})}function setupMenu(){const e=document.getElementById("menu-icon"),t=document.getElementById("nav-links");e&&t&&(e.addEventListener("click",()=>{const n=e.getAttribute("aria-expanded")==="true";t.classList.toggle("active"),e.setAttribute("aria-expanded",String(!n))}),t.addEventListener("click",a=>{a.target.tagName==="A"&&t.classList.contains("active")&&(t.classList.remove("active"),e.setAttribute("aria-expanded","false"))}))}function setupRippleEffect(){document.querySelectorAll(".glass-card, .skill-card").forEach(e=>{e.addEventListener("click",function(t){if(t.target.closest("a"))return;const n=e.getBoundingClientRect(),a=document.createElement("span");a.style.left=`${t.clientX-n.left}px`,a.style.top=`${t.clientY-n.top}px`,a.classList.add("ripple");const o=e.querySelector(".ripple");o&&o.remove(),this.appendChild(a),setTimeout(()=>{a.remove()},600)})})}function createParticles(e){const t=document.getElementById("particle-container");if(!t)return;for(let n=0;n<e;n++){const a=document.createElement("div");a.classList.add("particle");const o=Math.random()*4+1;a.style.width=`${o}px`,a.style.height=`${o}px`,a.style.top=`${Math.random()*100}%`,a.style.left=`${Math.random()*100}%`,a.style.animationDuration=`${Math.random()*5+5}s`,a.style.animationDelay=`${Math.random()*5}s`,t.appendChild(a)}}function setupScrollAnimations(){const e=document.querySelectorAll(".hidden-section"),t=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add("visible")})},{threshold:.1});e.forEach(e=>t.observe(e))}function setupLazyLoading(){const e=document.querySelectorAll(".lazy-image"),t=new IntersectionObserver((e,n)=>{e.forEach(e=>{if(e.isIntersecting){const a=e.target,o=a.parentElement;a.src=a.dataset.src,a.onload=()=>{a.classList.add("loaded"),o.classList.contains("image-skeleton")&&o.classList.add("loaded")},a.onerror=()=>{o.classList.contains("image-skeleton")&&o.classList.add("error")},n.unobserve(a)}})},{rootMargin:"0px 0px 200px 0px"});e.forEach(e=>t.observe(e))}function setupPerformanceObservers(){const e=document.getElementById("particle-container"),t=document.getElementById("greeting-text"),n=new IntersectionObserver(e=>{e.forEach(e=>{const t=e.target;e.isIntersecting?t.classList.add("animations-active"):t.classList.remove("animations-active")})},{threshold:0});e&&n.observe(e),t&&n.observe(t)}
+/**
+ * Sets up theme switching functionality (light/dark mode).
+ */
+function setupTheme() {
+    const themeToggle = document.getElementById("theme-toggle");
+    if (!themeToggle) return;
+
+    const docElement = document.documentElement;
+    const setTheme = (theme) => {
+        docElement.setAttribute("data-theme", theme);
+    };
+
+    // Set initial theme to dark as default
+    setTheme("dark");
+
+    themeToggle.addEventListener("click", () => {
+        const currentTheme = docElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        setTheme(newTheme);
+    });
+}
+
+/**
+ * Sets up the mobile navigation menu toggle.
+ */
+function setupMenu() {
+    const menuIcon = document.getElementById("menu-icon");
+    const navLinks = document.getElementById("nav-links");
+
+    if (menuIcon && navLinks) {
+        menuIcon.addEventListener("click", () => {
+            const isExpanded = menuIcon.getAttribute("aria-expanded") === "true";
+            navLinks.classList.toggle("active");
+            menuIcon.setAttribute("aria-expanded", String(!isExpanded));
+        });
+
+        // Close menu when a link is clicked
+        navLinks.addEventListener("click", (e) => {
+            if (e.target.tagName === "A" && navLinks.classList.contains("active")) {
+                navLinks.classList.remove("active");
+                menuIcon.setAttribute("aria-expanded", "false");
+            }
+        });
+    }
+}
+
+/**
+ * Adds a ripple effect to specified card elements on click.
+ */
+function setupRippleEffect() {
+    document.querySelectorAll(".glass-card, .skill-card").forEach(card => {
+        card.addEventListener("click", function(e) {
+            // Do not trigger ripple if a link inside the card is clicked
+            if (e.target.closest("a")) return;
+
+            const rect = card.getBoundingClientRect();
+            const ripple = document.createElement("span");
+            
+            ripple.style.left = `${e.clientX - rect.left}px`;
+            ripple.style.top = `${e.clientY - rect.top}px`;
+            ripple.classList.add("ripple");
+            
+            // Remove existing ripple before adding a new one
+            const existingRipple = card.querySelector(".ripple");
+            if (existingRipple) {
+                existingRipple.remove();
+            }
+            
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+}
+
+/**
+ * Creates and appends animated particles to the background.
+ * @param {number} count - The number of particles to create.
+ */
+function createParticles(count) {
+    const container = document.getElementById("particle-container");
+    if (!container) return;
+
+    for (let i = 0; i < count; i++) {
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+
+        const size = Math.random() * 4 + 1;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDuration = `${Math.random() * 5 + 5}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        container.appendChild(particle);
+    }
+}
+
+/**
+ * Sets up scroll-triggered animations for sections.
+ */
+function setupScrollAnimations() {
+    const hiddenSections = document.querySelectorAll(".hidden-section");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.1 });
+
+    hiddenSections.forEach(section => observer.observe(section));
+}
+
+/**
+ * Sets up lazy loading for images.
+ */
+function setupLazyLoading() {
+    const lazyImages = document.querySelectorAll(".lazy-image");
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                const skeleton = img.parentElement;
+                
+                img.src = img.dataset.src;
+                img.onload = () => {
+                    img.classList.add("loaded");
+                    if (skeleton.classList.contains("image-skeleton")) {
+                        skeleton.classList.add("loaded");
+                    }
+                };
+                img.onerror = () => {
+                    if (skeleton.classList.contains("image-skeleton")) {
+                        skeleton.classList.add("error");
+                    }
+                };
+                
+                observer.unobserve(img);
+            }
+        });
+    }, { rootMargin: "0px 0px 200px 0px" });
+
+    lazyImages.forEach(image => observer.observe(image));
+}
+
+/**
+ * Optimizes performance by pausing animations when they are not visible.
+ */
+function setupPerformanceObservers() {
+    const particleContainer = document.getElementById("particle-container");
+    const greetingText = document.getElementById("greeting-text");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const target = entry.target;
+            if (entry.isIntersecting) {
+                target.classList.add("animations-active");
+            } else {
+                target.classList.remove("animations-active");
+            }
+        });
+    }, { threshold: 0 });
+
+    if (particleContainer) observer.observe(particleContainer);
+    if (greetingText) observer.observe(greetingText);
+}
 
 
 /**
@@ -248,6 +403,12 @@ function setupContactForm() {
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
+        // [UPDATED] Check if reCAPTCHA was passed
+        if (!recaptchaPassed) {
+            showStatus('សូមមេត្តាផ្ទៀងផ្ទាត់ថាអ្នកមិនមែនជា Robot (reCAPTCHA)។', 'error');
+            return;
+        }
+        
         if (!formRateLimiter.isAllowed()) {
             const waitTime = Math.ceil(formRateLimiter.getRemainingTime() / 1000 / 60);
             showStatus(`អ្នកបានផ្ញើសារច្រើនពេក។ សូមរង់ចាំ ${waitTime} នាទីទៀត។`, 'error');
@@ -282,6 +443,7 @@ function setupContactForm() {
             if (response.ok) {
                 showStatus('សូមអរគុណ! សាររបស់អ្នកត្រូវបានផ្ញើដោយជោគជ័យ។', 'success');
                 form.reset();
+                // Reset reCAPTCHA if you have a widget ID, for now it expires automatically.
             } else {
                 const errorData = await response.json().catch(() => ({}));
                 throw new Error(errorData.error || 'Server error.');
