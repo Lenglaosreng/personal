@@ -1,23 +1,6 @@
-# This file configures custom HTTP headers for your Netlify site.
-# Place this file in the root directory of your project.
-
 /*
-  # Content Security Policy (CSP)
-  # A strict policy to mitigate XSS attacks.
-  # default-src 'self': Only allows resources from our own domain by default.
-  # script-src 'self': Allows scripts from our own domain.
-  # style-src 'self' ...: Allows styles from our domain, inline styles, and external fonts.
-  # connect-src 'self': Allows connections to our domain (for Netlify Functions).
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https: data:; connect-src 'self';
-
-  # X-Frame-Options: Prevents the site from being rendered in an <iframe> (Clickjacking protection).
   X-Frame-Options: DENY
-
-  # X-Content-Type-Options: Prevents the browser from MIME-sniffing a response.
   X-Content-Type-Options: nosniff
-
-  # Referrer-Policy: Controls how much referrer information is sent with requests.
   Referrer-Policy: strict-origin-when-cross-origin
-
-  # Permissions-Policy: Controls which browser features can be used.
-  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';
