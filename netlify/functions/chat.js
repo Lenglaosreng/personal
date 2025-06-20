@@ -8,20 +8,15 @@
 
 // Helper function to sanitize input
 const sanitize = (str) => {
-    if (!str) return '';
+    if (typeof str !== 'string') return '';
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 };
 
 exports.handler = async function(event) {
     // 1. Origin Check
     const allowedOrigin = 'https://sreng.netlify.app';
-    const requestOrigin = event.headers.origin;
-    if (requestOrigin !== allowedOrigin) {
+    if (event.headers.origin !== allowedOrigin || event.httpMethod !== "POST") {
         return { statusCode: 403, body: JSON.stringify({ error: "Forbidden" }) };
-    }
-
-    if (event.httpMethod !== "POST") {
-        return { statusCode: 405, body: JSON.stringify({ error: "Method Not Allowed" }) };
     }
 
     try {
