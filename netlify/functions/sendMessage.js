@@ -17,7 +17,6 @@ exports.handler = async function(event) {
     const allowedOrigin = 'https://sreng.netlify.app';
     const requestOrigin = event.headers.origin;
 
-    // Allow requests only from the deployed site
     if (requestOrigin !== allowedOrigin) {
         return { statusCode: 403, body: JSON.stringify({ error: "Forbidden" }) };
     }
