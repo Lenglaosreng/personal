@@ -1,11 +1,4 @@
-let recaptchaPassed = false;
-
-function onReCaptchaSuccess(token) {
-    recaptchaPassed = true;
-}
-function onReCaptchaExpired() {
-    recaptchaPassed = false;
-}
+let recaptchaPassed = false; // This variable is no longer used by the new form logic, but may be used elsewhere.
 
 /**
  * SECURED VERSION - Main entry point. Waits for the DOM to be fully loaded before running any scripts.
@@ -104,7 +97,7 @@ function initializePage() {
     setupScrollAnimations();
     setupLazyLoading();
     initializeChatbot();
-    setupContactForm();
+    setupContactForm(); // This will now use the updated function below
     setupPerformanceObservers();
 }
 
@@ -170,7 +163,6 @@ function setupRippleEffect() {
             ripple.style.top = `${e.clientY - rect.top}px`;
             ripple.classList.add("ripple");
             
-            // Remove existing ripple before adding a new one
             const existingRipple = card.querySelector(".ripple");
             if (existingRipple) {
                 existingRipple.remove();
@@ -354,14 +346,13 @@ async function sendMessage() {
         return;
     }
 
-    appendMessage("user", message); // Display the original (but validated) message
+    appendMessage("user", message);
     chatbotInput.value = "";
     chatbotInput.disabled = true;
     chatbotSend.disabled = true;
     showTypingIndicator();
 
     try {
-        // Data is sanitized server-side
         const response = await fetch("/.netlify/functions/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -389,8 +380,11 @@ async function sendMessage() {
     }
 }
 
+// ==================================================================
+// == THIS IS THE UPDATED FUNCTION FOR THE CONTACT FORM
+// ==================================================================
 /**
- * SECURED: Sets up the contact form with comprehensive client-side validation and rate limiting.
+ * SECURED: Sets up the contact form with comprehensive client-side validation and reCAPTCHA.
  */
 function setupContactForm() {
     const form = document.getElementById('contact-form');
@@ -399,16 +393,14 @@ function setupContactForm() {
     const formStatus = document.getElementById('form-status');
     const submitBtn = document.getElementById('form-submit-btn');
     const btnText = submitBtn.querySelector('.submit-btn-text');
-
-    form.addEventListener('submit', async function (e) {
+    
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // [UPDATED] Check if reCAPTCHA was passed
-        if (!recaptchaPassed) {
-            showStatus('សូមមេត្តាផ្ទៀងផ្ទាត់ថាអ្នកមិនមែនជា Robot (reCAPTCHA)។', 'error');
-            return;
-        }
-        
+        // Prevent multiple submissions while processing
+        if (submitBtn.disabled) return;
+
+        // Rate limiting check
         if (!formRateLimiter.isAllowed()) {
             const waitTime = Math.ceil(formRateLimiter.getRemainingTime() / 1000 / 60);
             showStatus(`អ្នកបានផ្ញើសារច្រើនពេក។ សូមរង់ចាំ ${waitTime} នាទីទៀត។`, 'error');
@@ -429,35 +421,53 @@ function setupContactForm() {
         }
 
         submitBtn.disabled = true;
-        btnText.textContent = 'កំពុងផ្ញើ...';
+        btnText.textContent = 'កំពុងផ្ទៀងផ្ទាត់...';
         showStatus('', '');
 
-        try {
-            // Data is sanitized server-side
-            const response = await fetch('/.netlify/functions/sendMessage', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
+        // Execute reCAPTCHA and then submit
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6Ler0WUrAAAAAErDAoO4ENDVZBHtEs6Gr7cWFR-b', { action: 'submit' }).then(async function(token) {
+                
+                // Add the token to our form data
+                formData['g-recaptcha-response'] = token;
+                
+                btnText.textContent = 'កំពុងផ្ញើ...';
 
-            if (response.ok) {
-                showStatus('សូមអរគុណ! សាររបស់អ្នកត្រូវបានផ្ញើដោយជោគជ័យ។', 'success');
-                form.reset();
-                // Reset reCAPTCHA if you have a widget ID, for now it expires automatically.
-            } else {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error || 'Server error.');
-            }
-        } catch (error) {
-            showStatus('មានបញ្ហាក្នុងការផ្ញើសារ។ សូមព្យាយាមម្តងទៀត។', 'error');
-        } finally {
-            submitBtn.disabled = false;
-            btnText.textContent = 'ផ្ញើសារទៅ Telegram';
-        }
+                try {
+                    const response = await fetch('/.netlify/functions/sendMessage', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        showStatus('សូមអរគុណ! សាររបស់អ្នកត្រូវបានផ្ញើដោយជោគជ័យ។', 'success');
+                        form.reset();
+                    } else {
+                        // Display error message from server
+                        throw new Error(result.error || 'Server error.');
+                    }
+                } catch (error) {
+                    showStatus(error.message || 'មានបញ្ហាក្នុងការផ្ញើសារ។ សូមព្យាយាមម្តងទៀត។', 'error');
+                } finally {
+                    // Re-enable the button
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'ផ្ញើសារទៅ Telegram';
+                }
+            });
+        });
     });
 
     function showStatus(message, type) {
         formStatus.textContent = message;
         formStatus.className = `form-status ${type}`;
+        // Make it visible
+        if (message) {
+            formStatus.style.display = 'block';
+        } else {
+            formStatus.style.display = 'none';
+        }
     }
 }
