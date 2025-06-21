@@ -217,7 +217,8 @@
                         <label for="message" class="form-label">សាររបស់អ្នក</label>
                         <textarea id="message" name="message" class="form-textarea" rows="5" required placeholder="សរសេរសាររបស់អ្នកនៅទីនេះ..."></textarea>
                     </div>
-                    <button type="submit" class="form-submit-btn" id="form-submit-btn">
+                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+        <button type="submit" class="form-submit-btn" id="form-submit-btn">
                         <span class="submit-btn-text">ផ្ញើសារទៅ Telegram</span>
                         <i class="fas fa-paper-plane" aria-hidden="true"></i>
                     </button>
@@ -240,12 +241,7 @@
       </div>
     </div>
 
-    <div class="g-recaptcha"
-         data-sitekey="6Ler0WUrAAAAAErDAoO4ENVDZH8HEs6Gr7cWfR-b"
-         data-callback="onReCaptchaSuccess"
-         data-expired-callback="onReCaptchaExpired">
-    </div>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Ler0WUrAAAAAErDAoO4ENDVZBHtEs6Gr7cWFR-b" async defer></script>
 
 
     <footer class="footer">
