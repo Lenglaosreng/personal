@@ -1,66 +1,21 @@
 <!DOCTYPE html>
-<!-- Add data-theme attribute for theme management, default to dark -->
 <html lang="km" data-theme="dark">
 <head>
-    <!-- Enhanced Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" 
-      content="default-src 'self'; 
-               script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ 'nonce-randomstring123';
-               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-               font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-               img-src 'self' data: https://placehold.co https://via.placeholder.com;
-               connect-src 'self' https://*.netlify.app https://*.netlify.com;
-               frame-src 'self' https://www.google.com/recaptcha/ https://recaptcha.google.com;
-               object-src 'none';
-               base-uri 'self';
-               form-action 'self';">
-
-    <!-- Enhanced Security Headers -->
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
-    
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- DNS prefetch for external resources -->
-    <link rel="dns-prefetch" href="https://www.google.com">
-    <link rel="dns-prefetch" href="https://www.gstatic.com">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sreng | អ្នកបង្កើតគេហទំព័រខ្មែរ</title>
     
+    <!-- Meta Tags -->
     <meta name="description" content="ស្វាគមន៍មកកាន់គេហទំព័ររបស់ ស្រេង - ជាកន្លែងបង្ហាញពីដំណើរ ជំនាញ និងគម្រោងនានាក្នុងការបង្កើតគេហទំព័រ។">
-    <meta name="keywords" content="web developer, cambodia, portfolio, ស្រេង">
     <meta name="author" content="Sreng">
-    <meta name="robots" content="index, follow">
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Sreng | អ្នកបង្កើតគេហទំព័រខ្មែរ">
-    <meta property="og:description" content="ស្វាគមន៍មកកាន់គេហទំព័ររបស់ ស្រេង - Web Developer ពីកម្ពុជា">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yoursite.com">
-    <meta property="og:image" content="https://yoursite.com/img/og-image.jpg">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sreng | អ្នកបង្កើតគេហទំព័រខ្មែរ">
-    <meta name="twitter:description" content="ស្វាគមន៍មកកាន់គេហទំព័ររបស់ ស្រេង - Web Developer ពីកម្ពុជា">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="img/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-    
-    <!-- Fonts with display=swap for performance -->
+    <!-- Preconnect and Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="script.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -75,7 +30,6 @@
             <li><a href="#skills">ជំនាញ</a></li>
             <li><a href="#timeline">ដំណើរជីវិត</a></li>
             <li><a href="#projects">គម្រោង</a></li>
-            <li><a href="#contact">ទំនាក់ទំនង</a></li>
         </ul>
         <div class="nav-controls">
             <button class="theme-toggle" id="theme-toggle" aria-label="ប្តូរ Theme">
@@ -89,6 +43,7 @@
     </nav>
 
     <main>
+        <!-- Home, About, Skills, Timeline, Projects Sections remain the same -->
         <section id="home" class="hidden-section">
             <div class="hero-text">
                 <h1 class="greeting" id="greeting-text">សួស្តី, ខ្ញុំ <span class="highlight">ស្រេង</span></h1>
@@ -134,121 +89,71 @@
         <section id="timeline" class="hidden-section">
             <h1 class="section-title"><span class="highlight">ដំណើរ</span>ជីវិត</h1>
             <div class="timeline-container">
-                <!-- Timeline Item 1 -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h2>2023 - ចំណុចចាប់ផ្តើម</h2>
-                        <p>ចាប់ផ្តើមស្វែងយល់ពីពិភពកូដដំបូង ដោយរៀនពី HTML និង CSS។ បានបង្កើតគេហទំព័រដំបូងបំផុតដែលជា Static page ដ៏សាមញ្ញ។</p>
-                    </div>
-                </div>
-                <!-- Timeline Item 2 -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h2>2024 - ការឈានចូល JavaScript</h2>
-                        <p>បានចាប់ផ្តើមរៀន JavaScript ដើម្បីធ្វើឱ្យគេហទំព័រមានអន្តរកម្ម។ បានបង្កើតគម្រោងតូចៗដូចជា Calculator និង To-Do List។</p>
-                    </div>
-                </div>
-                <!-- Timeline Item 3 -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h2>ដើមឆ្នាំ 2025 - ការស្វែងយល់ពី Backend</h2>
-                        <p>ចាប់ផ្តើមរៀនអំពី APIs និងបានបង្កើត Telegram Bot ដំបូង (Dictionary Bot) ដោយប្រើប្រាស់ Serverless Functions។</p>
-                    </div>
-                </div>
-                <!-- Timeline Item 4 -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h2>បច្ចុប្បន្ន 2025 - ការកសាង Portfolio</h2>
-                        <p>កំពុងផ្តោតសំខាន់លើការកសាង Portfolio នេះឡើង, ដោយប្រើប្រាស់នូវរាល់ជំនាញដែលបានរៀន និងកែលម្អវាជារៀងរាល់ថ្ងៃ។</p>
-                    </div>
-                </div>
+                <div class="timeline-item"><div class="timeline-content"><h2>2023 - ចំណុចចាប់ផ្តើម</h2><p>ចាប់ផ្តើមស្វែងយល់ពីពិភពកូដដំបូង ដោយរៀនពី HTML និង CSS។</p></div></div>
+                <div class="timeline-item"><div class="timeline-content"><h2>2024 - ការឈានចូល JavaScript</h2><p>បានចាប់ផ្តើមរៀន JavaScript ដើម្បីធ្វើឱ្យគេហទំព័រមានអន្តរកម្ម។</p></div></div>
+                <div class="timeline-item"><div class="timeline-content"><h2>ដើមឆ្នាំ 2025 - ការស្វែងយល់ពី Backend</h2><p>ចាប់ផ្តើមរៀនអំពី APIs និងបានបង្កើត Telegram Bot ដំបូង។</p></div></div>
+                <div class="timeline-item"><div class="timeline-content"><h2>បច្ចុប្បន្ន 2025 - ការកសាង Portfolio</h2><p>កំពុងផ្តោតសំខាន់លើការកសាង Portfolio នេះឡើង។</p></div></div>
             </div>
         </section>
         
         <section id="projects" class="hidden-section">
             <h1 class="section-title"><span class="highlight">គម្រោង</span>របស់ខ្ញុំ</h1>
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="image-skeleton"><img data-src="project/dic.jpg" alt="រូបភាពគម្រោង DictionaryKhmerBot" class="lazy-image"></div>
-                    <h3>DictionaryKhmerBot</h3>
-                    <p>បូត Telegram សម្រាប់ស្វែងរកអត្ថន័យពាក្យក្នុងវចនានុក្រមខ្មែរ។</p>
-                    <div class="project-links"><a href="https://t.me/dictionarykhbot" target="_blank">សាកល្បង Bot</a></div>
-                </div>
-                <div class="project-card">
-                    <div class="image-skeleton"><img data-src="project/bot.jpg" alt="រូបភាពគម្រោង DownloadFromPlatformBot" class="lazy-image"></div>
-                    <h3>DownloadFromPlatformBot</h3>
-                    <p>ជាជំនួយការសម្រាប់ទាញយកវីដេអូ ឬចម្រៀងពីបណ្ដាញសង្គមធំៗ។</p>
-                    <div class="project-links"><a href="#" target="_blank" class="disabled-link">Coming Soon</a></div>
-                </div>
-                 <div class="project-card">
-                    <div class="image-skeleton"><img data-src="https://placehold.co/600x400/74ee15/0f0c29?text=Weather+App" alt="រូបភាពគម្រោង Weather App" class="lazy-image"></div>
-                    <h3>Weather Forecast App</h3>
-                    <p>កម្មវិធីគេហទំព័រសាមញ្ញមួយសម្រាប់ពិនិត្យមើលការព្យាករណ៍អាកាសធាតុបច្ចុប្បន្ននៅទីតាំងណាមួយ។</p>
-                    <div class="project-links"><a href="#" target="_blank" class="disabled-link">Live Demo</a><a href="#" target="_blank" class="disabled-link">GitHub</a></div>
-                </div>
-                <div class="project-card">
-                    <div class="image-skeleton"><img data-src="https://placehold.co/600x400/f000ff/eaf2ff?text=Todo+List" alt="រូបភាពគម្រោង Todo List" class="lazy-image"></div>
-                    <h3>Interactive To-Do List</h3>
-                    <p>កម្មវិធីសម្រាប់គ្រប់គ្រងកិច្ចការប្រចាំថ្ងៃ ដែលអាចឱ្យអ្នកប្រើប្រាស់បន្ថែម, លុប, និងគូសចំណាំកិច្ចការ។</p>
-                    <div class="project-links"><a href="#" target="_blank" class="disabled-link">Live Demo</a><a href="#" target="_blank" class="disabled-link">GitHub</a></div>
-                </div>
+                <div class="project-card"><div class="image-skeleton"><img data-src="project/dic.jpg" alt="[រូបភាពគម្រោង DictionaryKhmerBot]" class="lazy-image"></div><h3>DictionaryKhmerBot</h3><p>បូត Telegram សម្រាប់ស្វែងរកអត្ថន័យពាក្យក្នុងវចនានុក្រមខ្មែរ។</p><div class="project-links"><a href="https://t.me/dictionarykhbot" target="_blank">សាកល្បង Bot</a></div></div>
+                <div class="project-card"><div class="image-skeleton"><img data-src="project/bot.jpg" alt="[រូបភាពគម្រោង DownloadFromPlatformBot]" class="lazy-image"></div><h3>DownloadFromPlatformBot</h3><p>ជាជំនួយការសម្រាប់ទាញយកវីដេអូ ឬចម្រៀងពីបណ្ដាញសង្គមធំៗ។</p><div class="project-links"><a href="#" target="_blank" class="disabled-link">Coming Soon</a></div></div>
             </div>
         </section>
-
-        <section id="contact" class="hidden-section">
-            <div class="glass-card">
-                <h2 class="section-title">ផ្ញើសារមកខ្ញុំ</h2>
-                <p>ទម្រង់នេះនឹងផ្ញើសារដោយផ្ទាល់ទៅកាន់ Telegram របស់ខ្ញុំ!</p>
-                
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="name" class="form-label">ឈ្មោះរបស់អ្នក</label>
-                        <input type="text" id="name" name="name" class="form-input" required placeholder="ឧ. សុខ ចាន់ថា">
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">អ៊ីមែលរបស់អ្នក (ស្រេចចិត្ត)</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="ឧ. sok.chantha@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="phonenumber" class="form-label">លេខទូរស័ព្ទ (ស្រេចចិត្ត)</label>
-                        <input type="tel" id="phonenumber" name="phonenumber" class="form-input" placeholder="ឧ. 012 345 678">
-                    </div>
-                    <div class="form-group">
-                        <label for="message" class="form-label">សាររបស់អ្នក</label>
-                        <textarea id="message" name="message" class="form-textarea" rows="5" required placeholder="សរសេរសាររបស់អ្នកនៅទីនេះ..."></textarea>
-                    </div>
-                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-        <button type="submit" class="form-submit-btn" id="form-submit-btn">
-                        <span class="submit-btn-text">ផ្ញើសារទៅ Telegram</span>
-                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                    </button>
-                    <div id="form-status" class="form-status"></div>
-                </form>
+        
+        <section id="contact-links" class="hidden-section">
+             <h1 class="section-title"><span class="highlight">ទំនាក់ទំនង</span></h1>
+             <div class="contact-cards-container">
+                <div class="profile-card"><img src="https://placehold.co/100x100/1877F2/FFFFFF?text=FB" alt="Facebook" class="profile-img"><h3>Facebook</h3><p class="role">Social Media</p><a href="https://www.facebook.com/share/1Dnub64XW6/" target="_blank" class="tg-button">ទាក់ទងខ្ញុំ</a></div>
+                <div class="profile-card"><img src="https://placehold.co/100x100/333/FFFFFF?text=GH" alt="Github" class="profile-img"><h3>Github</h3><p class="role">Developer</p><a href="https://github.com/Lenglaosreng" target="_blank" class="tg-button">ទាក់ទងខ្ញុំ</a></div>
+                <div class="profile-card"><img src="https://placehold.co/100x100/2AABEE/FFFFFF?text=TG" alt="Telegram" class="profile-img"><h3>Telegram</h3><p class="role">Contact</p><a href="https://t.me/Srengone" target="_blank" class="tg-button">ទាក់ទងខ្ញុំ</a></div>
             </div>
         </section>
     </main>
-
-    <button class="chatbot-toggle" id="chatbot-toggle" aria-label="បើក ឬបិទប្រអប់ជជែក">
-        <span aria-hidden="true">💬</span>
+    
+    <!-- Upgraded Chatbot -->
+    <button class="chatbot-toggle-v2" id="chatbot-toggle" aria-label="បើក ឬបិទប្រអប់ជជែក">
+        <i class="fa-solid fa-comments"></i>
+        <i class="fa-solid fa-xmark"></i>
     </button>
 
-    <div class="chatbot-popup" id="chatbot-popup">
-      <div class="chatbot-header"> SrengBot</div>
-      <div class="chatbot-body" id="chatbot-body"></div>
-      <div class="chatbot-input-container">
-        <input type="text" id="chatbot-input" placeholder="សួរអ្វីមក SrengBot..." aria-label="បញ្ចូលសាររបស់អ្នកនៅទីនេះ">
-        <button id="chatbot-send" aria-label="ផ្ញើសារ"><span aria-hidden="true">ផ្ញើ</span></button>
+    <div class="chatbot-popup-v2" id="chatbot-popup">
+      <div class="chatbot-header-v2">
+          <div class="chatbot-avatar-header">
+              <img src="https://placehold.co/40x40/74ee15/0f0c29?text=S" alt="SrengBot Avatar">
+          </div>
+          <div class="chatbot-title-status">
+              <h3>SrengBot</h3>
+              <div class="api-status" id="api-status" data-status="loading">
+                  <span></span> <p>กำลังเชื่อมต่อ...</p>
+              </div>
+          </div>
+      </div>
+      <div class="chatbot-body-v2" id="chatbot-body">
+          <!-- Messages will be injected here by JavaScript -->
+      </div>
+      <div class="chatbot-input-container-v2">
+        <textarea id="chatbot-input" placeholder="សួរសំណួរមក SrengBot..." rows="1"></textarea>
+        <button id="chatbot-send" aria-label="ផ្ញើសារ">
+            <i class="fa-solid fa-paper-plane"></i>
+        </button>
       </div>
     </div>
-
-    <script src="https://www.google.com/recaptcha/api.js?render=6Ler0WUrAAAAAErDAoO4ENDVZBHtEs6Gr7cWFR-b" async defer></script>
-
+    <!-- End of Upgraded Chatbot -->
 
     <footer class="footer">
+        <div class="social">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/share/1Dnub64XW6/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://t.me/Srengone" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
         <p>© 2025 Sreng. Built with passion and determination from Cambodia 🇰🇭</p>
     </footer>
 
     <script src="script.js"></script>
-    
 </body>
 </html>
